@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Банк идей</title>
+<style>
+  :root {
+    --bg: #f5f3f0; --card: #ffffff; --ink: #231e1a; --muted: #756d66; --line: #e3ded8;
+    --accent: #f2711c; --soft: #fde8d9; --ok: #2f7d4f; --bad: #b3401f;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+         font: 15px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif; }
+  header { position: sticky; top: 0; z-index: 5; background: var(--ink); color: #f5f3f0; }
+  .bar { max-width: 1240px; margin: 0 auto; padding: 10px 16px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+  .bar h1 { font-size: 16px; margin: 0 8px 0 0; }
+  nav { display: flex; gap: 4px; flex-wrap: wrap; }
+  nav button { background: none; border: 0; color: #cfc8c0; font: inherit; padding: 6px 10px; border-radius: 6px; cursor: pointer; }
+  nav button.on { background: var(--accent); color: var(--ink); font-weight: 600; }
+  .runs { margin-left: auto; display: flex; gap: 6px; flex-wrap: wrap; }
+  .runs button { font: inherit; font-size: 13px; padding: 5px 10px; border-radius: 6px; border: 1px solid #4a423b; background: none; color: #f5f3f0; cursor: pointer; }
+  .runs button:hover { border-color: var(--accent); }
+  main { max-width: 1240px; margin: 0 auto; padding: 16px; }
+  .stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; margin-bottom: 16px; }
+  .stat { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 12px; }
+  .stat b { display: block; font-size: 24px; }
+  .stat span { color: var(--muted); font-size: 13px; }
+  .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; align-items: center; }
+  select, input[type=search] { font: inherit; padding: 6px 8px; border: 1px solid var(--line); border-radius: 6px; background: var(--card); color: var(--ink); }
+  .count { color: var(--muted); font-size: 14px; margin-left: auto; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; }
+  .card.skipped { opacity: .5; }
+  .embed { background: var(--ink); position: relative; }
+  .embed.open { aspect-ratio: 9 / 14; }
+  .embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .embed button { width: 100%; padding: 10px; background: none; border: 0; color: #f5f3f0; font: inherit; font-size: 14px; cursor: pointer; text-align: left; }
+  .body { padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+  .top { display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+  .author { font-weight: 600; color: var(--ink); }
+  .muted { color: var(--muted); font-size: 13px; }
+  .nums { display: flex; gap: 10px; flex-wrap: wrap; font-size: 14px; align-items: center; }
+  .x { background: var(--soft); color: var(--bad); padding: 0 6px; border-radius: 4px; font-weight: 700; }
+  .rel { margin-left: auto; font-weight: 700; padding: 0 7px; border-radius: 4px; border: 1px solid var(--line); }
+  .rel.hi { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .tag { font-size: 12px; border: 1px solid var(--line); border-radius: 999px; padding: 1px 8px; color: var(--muted); }
+  details { font-size: 13px; }
+  details summary { cursor: pointer; color: var(--muted); }
+  details p { white-space: pre-wrap; margin: 6px 0 0; }
+  .actions { display: flex; gap: 8px; margin-top: auto; padding-top: 4px; flex-wrap: wrap; }
+  .btn { font: inherit; font-size: 13px; padding: 5px 10px; border-radius: 6px; border: 1px solid var(--line);
+         background: var(--card); color: var(--ink); text-decoration: none; cursor: pointer; }
+  .btn.main { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .tablewrap { overflow-x: auto; background: var(--card); border: 1px solid var(--line); border-radius: 10px; margin-bottom: 24px; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); font-size: 14px; }
+  th { color: var(--muted); font-weight: 500; white-space: nowrap; }
+  td.n { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  h2 { font-size: 18px; margin: 8px 0 12px; }
+  .script { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 16px; margin-bottom: 16px; }
+  .script pre { white-space: pre-wrap; font: inherit; margin: 0; }
+  .warn { color: var(--bad); }
+  pre.log { background: var(--ink); color: #e9e4de; padding: 12px; border-radius: 10px; overflow-x: auto; font-size: 12px; white-space: pre-wrap; }
+  .empty { color: var(--muted); padding: 40px 0; text-align: center; }
+  #toast { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); background: var(--ink); color: #fff;
+           padding: 10px 16px; border-radius: 8px; font-size: 14px; display: none; max-width: 90vw; }
+  .running { font-size: 13px; color: var(--accent); }
+  @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } .runs { margin-left: 0; } }
+</style>
+</head>
+<body>
+<header><div class="bar">
+  <h1>Банк идей</h1>
+  <nav id="tabs">
+    <button data-t="ideas" class="on">Идеи</button>
+    <button data-t="scripts">Сценарии</button>
+    <button data-t="bloggers">Блогеры</button>
+    <button data-t="log">Журнал</button>
+  </nav>
+  <div class="runs">
+    <span class="running" id="running"></span>
+    <button data-run="discover">Найти блогеров</button>
+    <button data-run="collect">Собрать залёты</button>
+    <button data-run="transcribe">Расшифровать</button>
+    <button data-run="write">Написать сценарии</button>
+  </div>
+</div></header>
+<main id="main"><div class="empty">Загрузка…</div></main>
+<div id="toast"></div>
+<script>
+let D = null, tab = "ideas", flt = {q: "", state: "ideas", blogger: ""};
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
+const num = n => n == null ? "–" : Number(n).toLocaleString("ru-RU");
+const STATE = {outlier: "ждёт расшифровки", transcribed: "ждёт оценки", scored: "идея в банке", scripted: "есть сценарий", skipped: "убрано"};
+
+function toast(t) { const el = $("#toast"); el.textContent = t; el.style.display = "block"; clearTimeout(el._t); el._t = setTimeout(() => el.style.display = "none", 4000); }
+
+async function load() {
+  try { D = await (await fetch("/api/data")).json(); render(); }
+  catch (e) { $("#main").innerHTML = '<div class="empty">Сайт не отвечает. Запусти: python bank.py</div>'; }
+}
+async function post(body) {
+  const r = await fetch("/api/action", {method: "POST", headers: {"Content-Type": "application/json", "X-Local": "1"}, body: JSON.stringify(body)});
+  const j = await r.json(); toast(j.message || j.error || "Ошибка"); load();
+}
+
+function stats() {
+  const s = D.states, act = D.bloggers.filter(b => b.status === "active").length;
+  const box = (n, t) => `<div class="stat"><b>${num(n)}</b><span>${t}</span></div>`;
+  return `<div class="stats">${box(act, "блогеров в разведке")}${box(Object.values(s).reduce((a, b) => a + b, 0), "роликов просмотрено")}
+    ${box(D.reels.length, "залётов ×2 и больше")}${box((s.scored || 0) + (s.scripted || 0), "идей в банке")}${box(D.scripts.length, "сценариев")}</div>`;
+}
+
+function ideas() {
+  const bl = [...new Set(D.reels.map(r => r.blogger))].sort();
+  let list = D.reels.filter(r => {
+    if (flt.state === "ideas" && !["scored", "scripted"].includes(r.state)) return false;
+    if (flt.state !== "ideas" && flt.state !== "all" && r.state !== flt.state) return false;
+    if (flt.blogger && r.blogger !== flt.blogger) return false;
+    if (flt.q) { const q = flt.q.toLowerCase(); return [r.essence, r.transcript, r.caption, r.blogger].some(x => (x || "").toLowerCase().includes(q)); }
+    return true;
+  });
+  const opts = [["ideas", "Идеи в банке"], ["all", "Все залёты"], ["outlier", "Ждут расшифровки"], ["transcribed", "Ждут оценки"], ["scripted", "Есть сценарий"], ["skipped", "Убранные"]];
+  return stats() + `<div class="filters">
+    <select id="fState">${opts.map(([v, t]) => `<option value="${v}" ${flt.state === v ? "selected" : ""}>${t}</option>`).join("")}</select>
+    <select id="fBlogger"><option value="">Все блогеры</option>${bl.map(b => `<option ${flt.blogger === b ? "selected" : ""}>${esc(b)}</option>`).join("")}</select>
+    <input type="search" id="fQ" placeholder="Поиск по сути и тексту" value="${esc(flt.q)}">
+    <span class="count">${list.length}</span></div>` +
+    (list.length ? `<div class="grid">${list.map(card).join("")}</div>` : `<div class="empty">Пока пусто. Нажми «Собрать залёты» вверху или запусти python run.py</div>`);
+}
+
+function card(r) {
+  const hi = (r.relevance || 0) >= 8;
+  return `<div class="card ${r.state === "skipped" ? "skipped" : ""}">
+    <div class="embed" data-id="${esc(r.id)}"><button>▶ Смотреть ролик здесь</button></div>
+    <div class="body">
+      <div class="top"><a class="author" href="https://www.instagram.com/${esc(r.blogger)}/" target="_blank">@${esc(r.blogger)}</a>
+        <span class="muted">${esc((r.posted_at || "").slice(0, 10))}</span></div>
+      <div class="nums"><span class="x">×${r.multiplier ?? "–"}</span><span>${num(r.views)} просм.</span>
+        <span class="muted">обычно ${num(Math.round(r.median_views || 0))}</span>
+        ${r.relevance != null ? `<span class="rel ${hi ? "hi" : ""}" title="Насколько подходит твоему блогу">${r.relevance}/10</span>` : ""}</div>
+      ${r.content_type ? `<div><span class="tag">${esc(r.content_type)}</span> <span class="tag">${STATE[r.state] || r.state}</span></div>` : `<div><span class="tag">${STATE[r.state] || r.state}</span></div>`}
+      ${r.essence ? `<div>${esc(r.essence)}</div>` : ""}
+      ${r.relevance_why ? `<div class="muted">${esc(r.relevance_why)}</div>` : ""}
+      ${r.error ? `<div class="muted warn">${esc(r.error)}</div>` : ""}
+      ${r.transcript ? `<details><summary>Текст ролика</summary><p>${esc(r.transcript)}</p></details>` : ""}
+      <div class="actions">
+        <button class="btn main" data-act="write" data-id="${esc(r.id)}">${r.state === "scripted" ? "Ещё сценарий" : "Написать сценарий"}</button>
+        ${r.state === "skipped" ? `<button class="btn" data-act="restore" data-id="${esc(r.id)}">Вернуть</button>` : `<button class="btn" data-act="skip" data-id="${esc(r.id)}">Убрать</button>`}
+        <a class="btn" href="https://www.instagram.com/reel/${esc(r.id)}/" target="_blank">Открыть</a>
+      </div>
+    </div></div>`;
+}
+
+function scripts() {
+  if (!D.scripts.length) return `<div class="empty">Сценариев пока нет. Нажми «Написать сценарии» вверху или «Написать сценарий» на карточке идеи.</div>`;
+  return D.scripts.map(s => `<div class="script"><div class="muted">${esc(s.file)}</div>
+    <pre>${esc(s.text).replace(/⚠️ Не прошёл проверку:/, '<b class="warn">⚠️ Не прошёл проверку:</b>')}</pre></div>`).join("");
+}
+
+function bloggers() {
+  const act = D.bloggers.filter(b => b.status === "active"), prop = D.bloggers.filter(b => b.status === "proposed");
+  const link = u => `<a href="https://www.instagram.com/${esc(u)}/" target="_blank">@${esc(u)}</a>`;
+  let h = `<h2>Предложены нейросетью · ${prop.length}</h2>`;
+  h += prop.length ? `<div class="tablewrap"><table><tr><th>Блогер</th><th>Оценка</th><th>Подписчики</th><th>Почему</th><th></th></tr>
+    ${prop.map(b => `<tr><td>${link(b.username)}</td><td class="n"><b>${b.score ?? "–"}</b>/10</td><td class="n">${num(b.followers)}</td>
+      <td>${esc(b.why)}<div class="muted">${esc(b.source)}</div></td>
+      <td class="n"><button class="btn main" data-badd="${esc(b.username)}">В разведку</button> <button class="btn" data-brej="${esc(b.username)}">Не надо</button></td></tr>`).join("")}</table></div>`
+    : `<p class="muted">Нажми «Найти блогеров» вверху: нейросеть найдёт похожих по паспорту блога и твоему списку.</p>`;
+  h += `<h2>В разведке · ${act.length}</h2><div class="tablewrap"><table><tr><th>Блогер</th><th>Подписчики</th><th>Обычно просм.</th><th>Роликов</th><th>Залётов</th><th>Смотрели</th></tr>
+    ${act.map(b => `<tr><td>${link(b.username)}</td><td class="n">${num(b.followers)}</td><td class="n">${num(b.median_views && Math.round(b.median_views))}</td>
+      <td class="n">${b.total}</td><td class="n">${b.outliers}</td><td class="muted">${esc((b.last_scan || "ещё нет").replace("T", " ").slice(0, 16))}</td></tr>`).join("")}</table></div>`;
+  return h;
+}
+
+function render() {
+  $("#running").textContent = D.running.length ? "Работает: " + D.running.join(", ") : "";
+  $("#main").innerHTML = tab === "ideas" ? ideas() : tab === "scripts" ? scripts() : tab === "bloggers" ? bloggers()
+    : `<pre class="log">${esc(D.log.join("\n")) || "Журнал пуст"}</pre>`;
+}
+
+document.addEventListener("click", e => {
+  const t = e.target.closest("button, .embed");
+  if (!t) return;
+  if (t.dataset.t) { tab = t.dataset.t; document.querySelectorAll("#tabs button").forEach(b => b.classList.toggle("on", b === t)); render(); }
+  else if (t.dataset.run) post({kind: "run", action: t.dataset.run});
+  else if (t.dataset.act) post({kind: "reel", action: t.dataset.act, id: t.dataset.id});
+  else if (t.dataset.badd) post({kind: "blogger", action: "add", username: t.dataset.badd});
+  else if (t.dataset.brej) post({kind: "blogger", action: "reject", username: t.dataset.brej});
+  else if (t.classList.contains("embed") || t.parentElement.classList.contains("embed")) {
+    const box = t.classList.contains("embed") ? t : t.parentElement;
+    box.classList.add("open"); box.innerHTML = `<iframe src="https://www.instagram.com/reel/${box.dataset.id}/embed/" loading="lazy" allowfullscreen></iframe>`;
+  }
+});
+document.addEventListener("change", e => {
+  if (e.target.id === "fState") flt.state = e.target.value;
+  if (e.target.id === "fBlogger") flt.blogger = e.target.value;
+  if (["fState", "fBlogger"].includes(e.target.id)) render();
+});
+document.addEventListener("input", e => { if (e.target.id === "fQ") { flt.q = e.target.value; const p = e.target.selectionStart; render(); const i = $("#fQ"); i.focus(); i.setSelectionRange(p, p); } });
+load();
+setInterval(() => { if (!document.querySelector("iframe") && document.activeElement?.id !== "fQ") load(); }, 15000);
+</script>
+</body>
+</html>

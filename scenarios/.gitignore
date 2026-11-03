@@ -1,0 +1,9 @@
+.venv/
+data/
+logs/
+scripts/
+ig_profile/
+.env
+__pycache__/
+*.pyc
+.DS_Store

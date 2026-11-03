@@ -1,0 +1,441 @@
+{
+ "title": "UI-монтаж — демо (скилл TRIBE v2)",
+ "source": "source.mp4",
+ "transcript": "transcript_src.json",
+ "keep": [
+  [
+   0.0,
+   31.15
+  ]
+ ],
+ "card_crop": [
+  0,
+  590,
+  1080,
+  728
+ ],
+ "hero_crop": [
+  0,
+  620,
+  1080,
+  640
+ ],
+ "fix": {
+  "Клод": "Claude",
+  "Код.": "Code.",
+  "еще": "ещё",
+  "твое": "твоё",
+  "Мета": "Meta",
+  "Tribe": "TRIBE",
+  "мозг,": "«МОЗГ»,"
+ },
+ "out": "ui_demo.mp4",
+ "jobs": 6,
+ "scenes": [
+  {
+   "from": 0,
+   "type": "grid",
+   "face": "hero",
+   "imgs": [
+    "assets/reel_1.jpg",
+    "assets/reel_4.jpg",
+    "assets/reel_7.jpg",
+    "assets/reel_10.jpg",
+    "assets/reel_13.jpg",
+    "assets/reel_16.jpg",
+    "assets/reel_19.jpg",
+    "assets/reel_22.jpg",
+    "assets/reel_25.jpg",
+    "assets/reel_28.jpg",
+    "assets/reel_31.jpg",
+    "assets/reel_34.jpg",
+    "assets/reel_37.jpg",
+    "assets/reel_40.jpg",
+    "assets/reel_43.jpg",
+    "assets/reel_46.jpg",
+    "assets/reel_49.jpg",
+    "assets/reel_52.jpg"
+   ],
+   "y": 110,
+   "label": {
+    "text": "Твои рилсы",
+    "kind": "dot"
+   },
+   "mark_at": "рилса",
+   "mark_step": 0.03,
+   "pops": [
+    {
+     "kind": "badge",
+     "text": "Опубликовать",
+     "x": 330,
+     "y": 990,
+     "at": "выкладывай"
+    },
+    {
+     "kind": "x",
+     "x": 690,
+     "y": 990,
+     "at": "одного"
+    }
+   ]
+  },
+  {
+   "from": "пока",
+   "type": "code",
+   "label": {
+    "text": "Claude Code",
+    "kind": "dot"
+   },
+   "y": 150,
+   "tab": "терминал",
+   "lines": [
+    "$ claude",
+    "> /skills",
+    "",
+    "  {viral-check}",
+    "  прогноз рилса до публикации"
+   ],
+   "type_at": "пока",
+   "cps": 34,
+   "hl": [
+    {
+     "line": 4,
+     "at": "скилл"
+    }
+   ],
+   "pops": [
+    {
+     "kind": "badge",
+     "text": "Claude Code",
+     "x": 380,
+     "y": 720,
+     "at": "Клод"
+    }
+   ]
+  },
+  {
+   "from": "Он",
+   "type": "chart",
+   "label": {
+    "text": "Прогноз до публикации",
+    "kind": "dot"
+   },
+   "thumbs": [
+    "src:1:card",
+    "src:5:card",
+    "src:9:card",
+    "src:13:card",
+    "src:17:card",
+    "src:21:card",
+    "src:25:card"
+   ],
+   "draw_at": "сыграет",
+   "draw_dur": 3.0,
+   "marks": [
+    {
+     "x": 0.28,
+     "label": "досмотрят",
+     "at": "досмотрят"
+    },
+    {
+     "x": 0.55,
+     "label": "перешлют ↗",
+     "kind": "share",
+     "at": "перешлют"
+    },
+    {
+     "x": 0.74,
+     "label": "свайп",
+     "kind": "swipe",
+     "at": "свайпать"
+    }
+   ],
+   "word": {
+    "text": "точный",
+    "at": "пугающе",
+    "x": 170,
+    "y": 900
+   }
+  },
+  {
+   "from": "Мета",
+   "type": "app",
+   "label": {
+    "text": "GitHub",
+    "kind": "dot"
+   },
+   "img": "assets/tribe.png",
+   "box": [
+    24,
+    120,
+    1032,
+    700
+   ],
+   "view": [
+    0,
+    150,
+    1600
+   ],
+   "pops": [
+    {
+     "kind": "box",
+     "x": 40,
+     "y": 136,
+     "w": 180,
+     "h": 42,
+     "at": "Мета"
+    },
+    {
+     "kind": "box",
+     "x": 194,
+     "y": 262,
+     "w": 124,
+     "h": 52,
+     "at": "Tribe"
+    },
+    {
+     "kind": "badge",
+     "text": "TRIBE v2 от Meta",
+     "x": 300,
+     "y": 880,
+     "at": "модель"
+    }
+   ],
+   "cursor": [
+    {
+     "x": 700,
+     "y": 760,
+     "at": "Мета"
+    },
+    {
+     "x": 240,
+     "y": 290,
+     "at": "Tribe",
+     "click": true
+    }
+   ]
+  },
+  {
+   "from": "Она",
+   "type": "flip",
+   "label": {
+    "text": "Что видит мозг",
+    "kind": "head"
+   },
+   "video": [
+    "src:2:tall",
+    "src:4:tall",
+    "src:6:tall",
+    "src:8:tall",
+    "src:10:tall",
+    "src:12:tall"
+   ],
+   "seq": [
+    "assets/brain/b_00.png",
+    "assets/brain/b_01.png",
+    "assets/brain/b_02.png",
+    "assets/brain/b_03.png",
+    "assets/brain/b_04.png",
+    "assets/brain/b_05.png",
+    "assets/brain/b_06.png",
+    "assets/brain/b_07.png",
+    "assets/brain/b_08.png",
+    "assets/brain/b_09.png",
+    "assets/brain/b_10.png",
+    "assets/brain/b_11.png",
+    "assets/brain/b_12.png",
+    "assets/brain/b_13.png",
+    "assets/brain/b_14.png",
+    "assets/brain/b_15.png",
+    "assets/brain/b_16.png",
+    "assets/brain/b_17.png",
+    "assets/brain/b_18.png",
+    "assets/brain/b_19.png",
+    "assets/brain/b_20.png",
+    "assets/brain/b_21.png",
+    "assets/brain/b_22.png",
+    "assets/brain/b_23.png",
+    "assets/brain/b_24.png",
+    "assets/brain/b_25.png",
+    "assets/brain/b_26.png",
+    "assets/brain/b_27.png",
+    "assets/brain/b_28.png",
+    "assets/brain/b_29.png",
+    "assets/brain/b_30.png",
+    "assets/brain/b_31.png",
+    "assets/brain/b_32.png",
+    "assets/brain/b_33.png",
+    "assets/brain/b_34.png",
+    "assets/brain/b_35.png"
+   ],
+   "seq_at": "зоны",
+   "seq_fps": 8,
+   "cap_left": "видео",
+   "cap_right": "активность мозга",
+   "pops": [
+    {
+     "kind": "pill",
+     "text": "смотрит видео →",
+     "x": 490,
+     "y": 820,
+     "at": "смотрит"
+    }
+   ]
+  },
+  {
+   "from": "Я",
+   "type": "code",
+   "label": {
+    "text": "SKILL.md",
+    "kind": "dot"
+   },
+   "y": 150,
+   "tab": "viral-check",
+   "lines": [
+    "---",
+    "name: viral-check",
+    "model: {TRIBE v2}",
+    "---",
+    "1. Прогнать ролик через модель",
+    "2. Прогноз по секундам",
+    "3. Где начнут свайпать"
+   ],
+   "type_at": "встроил",
+   "cps": 80,
+   "hl": [
+    {
+     "line": 3,
+     "at": "модель"
+    }
+   ]
+  },
+  {
+   "from": "прогоняю",
+   "type": "grid",
+   "imgs": [
+    "assets/reel_1.jpg",
+    "assets/reel_4.jpg",
+    "assets/reel_7.jpg",
+    "assets/reel_10.jpg",
+    "assets/reel_13.jpg",
+    "assets/reel_16.jpg",
+    "assets/reel_19.jpg",
+    "assets/reel_22.jpg",
+    "assets/reel_25.jpg",
+    "assets/reel_28.jpg",
+    "assets/reel_31.jpg",
+    "assets/reel_34.jpg",
+    "assets/reel_37.jpg",
+    "assets/reel_40.jpg",
+    "assets/reel_43.jpg",
+    "assets/reel_46.jpg",
+    "assets/reel_49.jpg",
+    "assets/reel_52.jpg"
+   ],
+   "y": 110,
+   "label": {
+    "text": "Каждый пост",
+    "kind": "dot"
+   },
+   "step_in": 0.01,
+   "mark_at": 99,
+   "scan_at": "каждый",
+   "scan_dur": 1.8,
+   "checks_at": "каждый",
+   "check_step": 0.08
+  },
+  {
+   "from": "Закидываю",
+   "type": "app",
+   "label": {
+    "text": "Мой скилл",
+    "kind": "dot"
+   },
+   "img": "assets/analyser.png",
+   "box": [
+    24,
+    120,
+    1032,
+    700
+   ],
+   "view": [
+    150,
+    300,
+    1500
+   ],
+   "chips": [
+    {
+     "img": "src:3:card",
+     "name": "reel.mp4",
+     "x": 390,
+     "y": 360,
+     "from_xy": [
+      760,
+      980
+     ],
+     "at": "Закидываю",
+     "dur": 0.8
+    }
+   ],
+   "cursor": [
+    {
+     "x": 880,
+     "y": 1060,
+     "at": "Закидываю"
+    },
+    {
+     "x": 510,
+     "y": 480,
+     "at": "ролик"
+    }
+   ]
+  },
+  {
+   "from": "получаю",
+   "type": "chart",
+   "label": {
+    "text": "Прогноз готов",
+    "kind": "dot"
+   },
+   "thumbs": [
+    "src:1:card",
+    "src:5:card",
+    "src:9:card",
+    "src:13:card",
+    "src:17:card",
+    "src:21:card",
+    "src:25:card"
+   ],
+   "draw_at": "получаю",
+   "draw_dur": 1.2,
+   "marks": [
+    {
+     "x": 0.7,
+     "label": "свайп",
+     "kind": "swipe",
+     "at": "прогноз"
+    }
+   ]
+  },
+  {
+   "from": "Подпишись",
+   "type": "cta",
+   "title": "Напиши<br>*«МОЗГ»*",
+   "avatar": "src:5:card",
+   "name": "tyomavtemu",
+   "bio": [
+    "Тёма в тему · ИИ и нейросети · Автоматизация",
+    "t.me/TyomaVTemu"
+   ],
+   "link": true,
+   "comment": {
+    "text": "МОЗГ",
+    "at": "напиши",
+    "cps": 7
+   },
+   "sub": "Пришлю плейбук в директ",
+   "button": "Подписаться",
+   "handle": "@tyomavtemu"
+  }
+ ]
+}

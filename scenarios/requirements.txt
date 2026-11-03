@@ -1,0 +1,5 @@
+patchright>=1.50
+requests>=2.31
+python-dotenv>=1.0
+yt-dlp>=2025.1.1
+faster-whisper>=1.0

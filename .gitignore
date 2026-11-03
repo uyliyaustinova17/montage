@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*_profile/
+chrome-profile/
+.env
+data/
+logs/
+*.mp4
+*.wav
+*.mp3
+*.db
+*.bak
